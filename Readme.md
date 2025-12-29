@@ -220,3 +220,20 @@ Phase 2 implements a content intelligence pipeline that fetches existing article
 - Ensure Phase-1 is running before starting Phase-2
 - Use `.env` files to manage sensitive configuration
 - Follow the step-by-step guides above for setup and execution
+
+
+## Architectural Decisions
+
+- Phase-1 exposes clean REST APIs to decouple data storage from processing
+- Phase-2 consumes APIs instead of accessing the database directly, ensuring loose coupling
+- Phase-3 remains frontend-only and unaware of internal business logic
+- This separation allows independent scaling of scraping, AI processing, and UI layers
+
+
+## Intentional Non-Features
+
+- No Google HTML scraping (used Google Custom Search API for stability & compliance)
+- No direct database access in Phase-2 (API-driven design)
+- No authentication (out of scope for task)
+- No over-scraping to respect external sites
+
