@@ -4,6 +4,10 @@ This repository contains a **two-phase backend system** that demonstrates real-w
 
 The project is intentionally split into two phases with increasing complexity.
 
+This project simulates a real-world content automation workflow used by media and SaaS companies.
+It demonstrates how legacy content can be programmatically analyzed, enhanced using AI, and republished
+through a scalable, API-driven architecture.
+
 ---
 
 ## 🚀 Tech Stack
@@ -42,6 +46,10 @@ The project is intentionally split into two phases with increasing complexity.
   - URL
   - Excerpt
   - Published Date
+
+  The scraper reverses article order on each page to ensure the absolute oldest articles
+  are fetched first, not just the last page’s newest entries.
+
 
 #### ✅ Database
 
@@ -148,6 +156,9 @@ Build an end-to-end Node.js pipeline that:
 
 #### LLM-Powered Article Enhancement
 
+  The LLM prompt explicitly enforces originality, prohibits sentence-level copying,
+  and focuses on structure, tone, and clarity rather than content duplication.
+
 - Uses OpenAI API
 - Improves:
   - Formatting
@@ -215,12 +226,80 @@ Phase 2 implements a content intelligence pipeline that fetches existing article
 
 ---
 
+#### Failure Handling
+- Gracefully skips Google results that are not articles
+- Ignores empty or paywalled pages
+- Caps scraped content length to prevent LLM token overflow
+
+
+## 🔹 Phase 3: Frontend Development
+
+The third phase introduces a frontend application built with **Vite** and **React**. This phase focuses on creating a user-friendly interface for interacting with the backend services.
+
+### Key Features:
+- **Responsive Design**: Ensures usability across devices.
+- **Component-Based Architecture**: Utilizes React components for modular development.
+- **API Integration**: Connects to the backend services for data retrieval and manipulation.
+
+### Tech Stack:
+- **Vite**
+- **React**
+- **CSS**
+- **JavaScript**
+
+---
+
 ## Notes
 
 - Ensure Phase-1 is running before starting Phase-2
 - Use `.env` files to manage sensitive configuration
 - Follow the step-by-step guides above for setup and execution
 
+## Submission Guidelines
+
+### Local Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aditya3012singh/BeyondChats.git
+   cd BeyondChats
+   ```
+2. Install dependencies for each phase:
+   - For Phase 1:
+     ```bash
+     cd Phase-1
+     npm install
+     ```
+   - For Phase 2:
+     ```bash
+     cd Phase-2
+     npm install
+     ```
+   - For Phase 3:
+     ```bash
+     cd phase-3-frontend
+     npm install
+     ```
+3. Run the applications:
+   - For Phase 1:
+     ```bash
+     npm run dev
+     ```
+   - For Phase 2:
+     ```bash
+     node index.js
+     ```
+   - For Phase 3:
+     ```bash
+     npm run dev
+     ```
+
+### Data Flow Diagram / Architecture Diagram
+- [Insert your diagram here]
+
+### Live Link
+- [Insert the live link for your frontend project here]
+
+---
 
 ## Architectural Decisions
 
@@ -229,6 +308,23 @@ Phase 2 implements a content intelligence pipeline that fetches existing article
 - Phase-3 remains frontend-only and unaware of internal business logic
 - This separation allows independent scaling of scraping, AI processing, and UI layers
 
+# Architecture Diagram (Simple Is Enough)
+
+You do not need anything fancy.
+Use this ASCII diagram if you want to keep it simple:
+
+User
+ ↓
+React Frontend (Phase 3)
+ ↓
+Articles API (Phase 1)
+ ↓
+PostgreSQL (Prisma)
+ ↑
+AI Pipeline (Phase 2)
+ ├─ Google Search API
+ ├─ Competitor Scraper
+ └─ OpenAI API
 
 ## Intentional Non-Features
 

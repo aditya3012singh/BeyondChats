@@ -1,0 +1,36 @@
+name: BeyondChats Article Enhancement Pipeline
+
+on:
+  workflow_dispatch:        # manual trigger
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 3 * * *"     # runs daily at 3 AM UTC
+
+jobs:
+  run-phase-2:
+    name: Run Phase-2 AI Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Phase-2 dependencies
+        working-directory: Phase-2
+        run: npm install
+
+      - name: Run Phase-2 pipeline
+        working-directory: Phase-2
+        env:
+          PHASE1_API_URL: ${{ secrets.PHASE1_API_URL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_CX: ${{ secrets.GOOGLE_CX }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node index.js
