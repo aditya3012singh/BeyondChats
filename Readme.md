@@ -296,8 +296,9 @@ The third phase introduces a frontend application built with **Vite** and **Reac
 ### Data Flow Diagram / Architecture Diagram
 - [Insert your diagram here]
 
-### Live Link
-- [Insert the live link for your frontend project here]
+### Live Links
+- **Backend URL**: [https://beyondchats-noi2.onrender.com](https://beyondchats-noi2.onrender.com)
+- **Frontend URL**: [https://beyond-chats-scraping.netlify.app/](https://beyond-chats-scraping.netlify.app/)
 
 ---
 
